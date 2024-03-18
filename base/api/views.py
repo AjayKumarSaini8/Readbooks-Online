@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-import json
-from django.contrib.auth import authenticate, login, logout
-from django.views.decorators.csrf import ensure_csrf_cookie
-from django.views.decorators.http import require_POST
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+# import json
+# from django.contrib.auth import authenticate, login, logout
+# from django.views.decorators.csrf import ensure_csrf_cookie
+# from django.views.decorators.http import require_POST
 
 
 # Create your views here.
@@ -42,10 +45,11 @@ from django.views.decorators.http import require_POST
 #     return JsonResponse({"username": request.user.username})
 
 
+@api_view(["GET"])
 def getRoutes(request):
     routes = [
         "/api/token",
         "/api/token/refresh",
     ]
 
-    return JsonResponse(routes, safe=False)
+    return Response(routes)

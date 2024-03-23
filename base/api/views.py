@@ -3,6 +3,9 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 # import json
 # from django.contrib.auth import authenticate, login, logout
 # from django.views.decorators.csrf import ensure_csrf_cookie
@@ -43,6 +46,22 @@ from rest_framework.decorators import api_view
 #     if not request.user.is_authenticated:
 #         return JsonResponse({"isauthenticated": False})
 #     return JsonResponse({"username": request.user.username})
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims
+        token["username"] = user.username
+        # ...
+
+        return token
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
 
 
 @api_view(["GET"])

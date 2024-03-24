@@ -1,3 +1,4 @@
+// App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
@@ -13,9 +14,7 @@ function App() {
         <AuthProvider>
           <Header />
           <Routes>
-            <Route element={<PrivateRoutes />}>
-              <Route path='/' element={<HomePage />} />
-            </Route>
+            <Route path="/" element={<PrivateRoutes path='/' element={<HomePage />} />} />
             <Route path="/login" element={<LoginPage />} />
           </Routes>
         </AuthProvider>
@@ -23,6 +22,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;

@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
-import { Link } from 'react-router-dom'
+import { useSavedBooks } from '../context/SavedBooksContext'
 import axios from 'axios'
 import InfiniteScroll from "react-infinite-scroll-component";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom'
 
 const HomePage = () => {
     const [notes, setNotes] = useState([])
@@ -10,11 +13,15 @@ const HomePage = () => {
     const [books, setBooks] = useState([])
     const [error, setError] = useState(null)
     const { authTokens, logoutUser } = useContext(AuthContext)
+    const { addToBooklist } = useSavedBooks()
+
+    const showToastMessage = () => {
+        toast('Book added!');
+    };
 
     const fetchMoreData = async () => {
         if (query) {
             try {
-                // Assuming you have a page variable to keep track of the pagination
                 const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=books+${query}&startIndex=${books.length}&maxResults=20&key=AIzaSyAbr_mnO88bXbeseUjO5aX1L2xXQCoVr_c`);
                 const data = response.data;
                 setBooks(prevBooks => [...prevBooks, ...(data.items || [])]);
@@ -57,6 +64,8 @@ const HomePage = () => {
     useEffect(() => {
         getNotes()
     }, [])
+
+
     return (
         <div className="container mx-auto px-4">
             <p className="text-2xl font-bold mb-4">Home Page</p>
@@ -129,14 +138,20 @@ const HomePage = () => {
                                         >
                                             See more
                                         </a>
-                                        <Link to="/">
-                                            <button
-                                                type="button"
-                                                className="text-blue-500 hover:underline"
-                                            >
-                                                Add to Booklist
-                                            </button>
-                                        </Link>
+                                        {/* <Link to="/booklist"> */}
+                                        <button
+                                            onClick={() => {
+                                                addToBooklist(book);
+                                                showToastMessage();
+                                            }
+                                            }
+
+                                            type="button"
+                                            className="text-blue-500 hover:underline"
+                                        >
+                                            Add to Booklist
+                                        </button>
+                                        {/* </Link> */}
                                     </div>
                                 </div>
                             )

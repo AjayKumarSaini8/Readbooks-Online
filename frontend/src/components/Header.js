@@ -1,13 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { useSavedBooks } from '../context/SavedBooksContext';
-
 
 const Header = () => {
     const { user, logoutUser } = useContext(AuthContext);
-    const { addToBooklist } = useSavedBooks();
-
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <header className="bg-gray-800 text-white py-4">
@@ -16,33 +13,31 @@ const Header = () => {
                     BookClub
                 </Link>
 
-                <div>
-                    {user && <p className="mr-4">Hello, {user.username}</p>}
-                </div>
-                <div>
-                    {user ? (
-                        <div>
-                            <Link
-                                onClick={logoutUser}
-                                to="/logout"
-                                className="text-blue-300 hover:underline"
-                            >
-                                Logout
-                            </Link>
-                            <Link
-                                onClick={addToBooklist}
-                                to="/booklist"
-                                className="text-blue-300 hover:underline"
-                            >
-                                Saved Books
-                            </Link>
-                        </div>
-                    ) : (
-                        <Link to="/login" className="text-blue-300 hover:underline">
-                            Login
-                        </Link>
-                    )}
-                </div>
+                {user ? (
+                    <div>
+                        <button onClick={() => setIsOpen(!isOpen)} className='text-blue-300 hover:underline'>
+                            Hello, {user.username} ▼
+                        </button>
+
+                        {isOpen && (
+                            <div className='mt-2 bg-white text-black p-2 rounded shadow'>
+                                <Link to="/" className="block px-2 py-1 hover:bg-blue-500 hover:text-white">
+                                    Home
+                                </Link>
+                                <Link to="/booklist" className="block px-2 py-1 hover:bg-blue-500 hover:text-white">
+                                    Saved Books
+                                </Link>
+                                <button onClick={logoutUser} className="block w-full text-left px-2 py-1 hover:bg-blue-500 hover:text-white">
+                                    Logout
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <Link to="/login" className="text-blue-300 hover:underline">
+                        Login
+                    </Link>
+                )}
             </div>
         </header>
     );

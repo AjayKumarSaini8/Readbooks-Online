@@ -7,8 +7,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .serializers import NoteSerializer
-from base.models import Note
+# from .serializers import NoteSerializer
+# from base.models import Note
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -37,9 +37,9 @@ def getRoutes(request):
     return Response(routes)
 
 
-@api_view(["GET"])
-@permission_classes([IsAuthenticated])
-def getNotes(request):
-    notes = request.user.note_set.all()
-    serializer = NoteSerializer(notes, many=True)
-    return Response(serializer.data)
+# @api_view(["GET"])
+# @permission_classes([IsAuthenticated])
+# def getNotes(request):
+#     notes = request.user.note_set.all()
+#     serializer = NoteSerializer(notes, many=True)
+#     return Response(serializer.data)

@@ -3,12 +3,17 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-
+from rest_framework import generics
+from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-# from .serializers import NoteSerializer
-# from base.models import Note
+from .serializers import (
+    UserSerializer,
+    MyTokenObtainPairSerializer,
+    RegisterSerializer,
+)
+from base.models import Profile, User
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -27,6 +32,12 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = [AllowAny]
+    serializer_class = RegisterSerializer
+
+
 @api_view(["GET"])
 def getRoutes(request):
     routes = [
@@ -37,9 +48,11 @@ def getRoutes(request):
     return Response(routes)
 
 
-# @api_view(["GET"])
+# @api_view(["GET", "POST"])
 # @permission_classes([IsAuthenticated])
-# def getNotes(request):
+# def booklist(request):
+#     if request.method == "GET":
+#         context = f"He"
 #     notes = request.user.note_set.all()
 #     serializer = NoteSerializer(notes, many=True)
 #     return Response(serializer.data)

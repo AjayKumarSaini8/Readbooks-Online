@@ -25,13 +25,13 @@ class Profile(models.Model):
         return self.full_name
 
 
-def create_user_profile(sender, instatnce, created, **kwargs):
+def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instatnce)
+        Profile.objects.create(user=instance)
 
 
-def save_user_profile(sender, instatnce, **kwargs):
-    instatnce.profile.save()
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
 
 
 post_save.connect(create_user_profile, sender=User)

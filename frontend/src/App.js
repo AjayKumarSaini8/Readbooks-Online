@@ -9,6 +9,7 @@ import { AuthProvider } from './context/AuthContext';
 import { SavedBooksProvider } from './context/SavedBooksContext';
 import { ToastContainer } from 'react-toastify';
 import RegisterPage from './pages/RegisterPage';
+import Booklist from './pages/BookList';
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
           <AuthProvider>
             <Header />
             <Routes>
-              <Route path="*" element={<PrivateRoutes path="/" element={<HomePage />} />} />
+              <Route path='/' element={<HomePage />} />
+              <Route path="/booklist" element={<PrivateRoutes path="/booklist" element={<Booklist />} />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
             </Routes>

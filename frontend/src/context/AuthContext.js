@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
                 'email': email, 'username': username, 'password': password, 'password2': password2
             })
         })
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 201) {
             navigate('/login')
             swal.fire({
                 title: "Registration Successful, Login Now",
@@ -49,16 +49,18 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    const loginUser = async (username, password) => {
+    const loginUser = async (email, password) => {
         const response = await fetch('http://127.0.0.1:8000/api/token/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ email, password })
         })
         const data = await response.json()
+        console.log(data);
         if (response.status === 200) {
+            console.log('Logged In');
             setAuthTokens(data)
             setUser(jwtDecode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))

@@ -50,10 +50,9 @@ const LoginPage = () => {
                                             id="form2Example17"
                                             className="form-control form-control-lg"
                                             name='email'
+                                            placeholder='Email Address'
                                         />
-                                        <label className="form-label" htmlFor="form2Example17">
-                                            Email address
-                                        </label>
+
                                     </div>
                                     <div className="mb-4">
                                         <input
@@ -61,10 +60,9 @@ const LoginPage = () => {
                                             id="form2Example27"
                                             className="form-control form-control-lg"
                                             name='password'
+                                            placeholder='Password'
                                         />
-                                        <label className="form-label" htmlFor="form2Example27">
-                                            Password
-                                        </label>
+
                                     </div>
                                     <div className="pt-1 mb-4">
                                         <button

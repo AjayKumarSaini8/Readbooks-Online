@@ -9,7 +9,10 @@ const RegisterPage = () => {
     const [password2, setPassword2] = useState("");
 
     const { registerUser } = useContext(AuthContext);
-    console.log(email, username, password, password2);
+    console.log(email);
+    console.log(username);
+    console.log(password);
+    console.log(password2);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -49,6 +52,7 @@ const RegisterPage = () => {
                                     <div className="mb-4">
                                         <input
                                             type="email"
+                                            id="emailInput"
                                             className="form-control form-control-lg"
                                             placeholder="Email Address"
                                             onChange={e => setEmail(e.target.value)}
@@ -57,6 +61,7 @@ const RegisterPage = () => {
                                     <div className="mb-4">
                                         <input
                                             type="text"
+                                            id="usernameInput"
                                             className="form-control form-control-lg"
                                             placeholder="Username"
                                             onChange={e => setUsername(e.target.value)}
@@ -65,6 +70,7 @@ const RegisterPage = () => {
                                     <div className="mb-4">
                                         <input
                                             type="password"
+                                            id="passwordInput"
                                             className="form-control form-control-lg"
                                             placeholder="Password"
                                             onChange={e => setPassword(e.target.value)}
@@ -73,11 +79,13 @@ const RegisterPage = () => {
                                     <div className="mb-4">
                                         <input
                                             type="password"
+                                            id="confirmPasswordInput"
                                             className="form-control form-control-lg"
                                             placeholder="Confirm Password"
                                             onChange={e => setPassword2(e.target.value)}
                                         />
                                     </div>
+
                                     <div className="pt-1 mb-4">
                                         <button
                                             className="btn btn-dark btn-lg btn-block"

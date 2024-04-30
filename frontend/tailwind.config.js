@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      zIndex: {
+        '100': '100',
+      },
       gridTemplateColumns: {
         // Simple 4 column grid
         '16': 'repeat(4, minmax(0, 1fr))',

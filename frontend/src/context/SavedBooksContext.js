@@ -11,10 +11,15 @@ export const SavedBooksProvider = ({ children }) => {
 
     const addToBooklist = (book) => {
         setBooklist(prevBooklist => [...prevBooklist, book]);
+        console.log('addToBooklist');
+    };
+    const removeBooklist = (book) => {
+        setBooklist(prevBooklist => prevBooklist.filter(b => b.id !== book.id));
+        console.log('removeBooklist');
     };
 
     return (
-        <SavedBooksContext.Provider value={{ booklist, addToBooklist }}>
+        <SavedBooksContext.Provider value={{ booklist, addToBooklist, removeBooklist }}>
             {children}
         </SavedBooksContext.Provider>
     );

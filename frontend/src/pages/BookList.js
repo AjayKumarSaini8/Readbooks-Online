@@ -1,9 +1,14 @@
 import React from 'react';
 import { useSavedBooks } from '../context/SavedBooksContext';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Booklist = () => {
-    const { booklist } = useSavedBooks();
+    const { booklist, removeBooklist } = useSavedBooks();
+
+    const showToastMessage = () => {
+        toast('Book removed!');
+    };
 
     return (
         <div className="container mx-auto px-4">
@@ -24,14 +29,26 @@ const Booklist = () => {
                                 {book.volumeInfo.authors && book.volumeInfo.authors.join(', ')}
                             </p>
                             <div className="mt-2 flex justify-between items-center">
-                                <a
+                                <Link
                                     href={book.volumeInfo.previewLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="bg-green-500 text-white px-2 py-1 rounded hover:underline"
                                 >
                                     See more
-                                </a>
+                                </Link>
+                                <button
+                                    onClick={() => {
+                                        removeBooklist(book);
+                                        showToastMessage();
+                                    }
+                                    }
+
+                                    type="button"
+                                    className="text-blue-500 hover:underline"
+                                >
+                                    Remove from Booklist
+                                </button>
                             </div>
                         </div>
                     )

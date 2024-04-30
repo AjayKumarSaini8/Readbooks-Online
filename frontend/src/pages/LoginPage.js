@@ -72,21 +72,21 @@ const LoginPage = () => {
                                             Login
                                         </button>
                                     </div>
-                                    <a className="text-xs text-gray-500" href="#!">
+                                    <Link className="text-xs text-gray-500" href="#!">
                                         Forgot password?
-                                    </a>
+                                    </Link>
                                     <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
                                         Don't have an account?{" "}
                                         <Link to="/register" style={{ color: "#393f81" }}>
                                             Register Now
                                         </Link>
                                     </p>
-                                    <a href="#!" className="text-xs text-gray-500">
+                                    <Link href="#!" className="text-xs text-gray-500">
                                         Terms of use.
-                                    </a>
-                                    <a href="#!" className="text-xs text-gray-500">
+                                    </Link>
+                                    <Link href="#!" className="text-xs text-gray-500">
                                         Privacy policy
-                                    </a>
+                                    </Link>
                                 </form>
                             </div>
                         </div>

@@ -134,14 +134,14 @@ const HomePage = () => {
                                             {book.volumeInfo.authors && book.volumeInfo.authors.join(', ')}
                                         </p>
                                         <div className="mt-2 flex justify-between items-center">
-                                            <a
-                                                href={book.volumeInfo.previewLink}
+                                            <Link
+                                                to={book.volumeInfo.previewLink}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="bg-green-500 text-white px-2 py-1 rounded hover:underline"
                                             >
                                                 See more
-                                            </a>
+                                            </Link>
                                             {/* <Link to="/booklist"> */}
                                             <button
                                                 onClick={() => {

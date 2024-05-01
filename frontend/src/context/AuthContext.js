@@ -13,6 +13,26 @@ export const AuthProvider = ({ children }) => {
 
     const navigate = useNavigate();
 
+    function validatePassword(password) {
+        // Define the strong password pattern
+        var strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+        // Check if the password matches the pattern
+        if (!strongPasswordPattern.test(password)) {
+            swal.fire({
+                title: "Password is not in valid format. It should contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be at least eight characters long.",
+                icon: "error",
+                toast: true,
+                timer: 6000,
+                position: 'top-right',
+                timerProgressBar: true,
+                showConfirmButton: false,
+            })
+            return false;
+        }
+        return true;
+    }
+
     const registerUser = async (email, username, password, password2) => {
         const response = await fetch('http://127.0.0.1:8000/api/register/', {
             method: 'POST',
@@ -35,17 +55,7 @@ export const AuthProvider = ({ children }) => {
                 showConfirmButton: false,
             })
         } else {
-            console.log(response.status);
-            console.log('server error: ' + response.status);
-            swal.fire({
-                title: "An Error Occured " + response.status,
-                icon: "error",
-                toast: true,
-                timer: 6000,
-                position: 'top-right',
-                timerProgressBar: true,
-                showConfirmButton: false,
-            })
+            validatePassword(password || password2)
         }
     }
 
@@ -92,15 +102,17 @@ export const AuthProvider = ({ children }) => {
         setUser(null)
         localStorage.removeItem('authTokens')
         navigate('/login')
-        swal.fire({
-            title: "You have been logged out...",
-            icon: "success",
-            toast: true,
-            timer: 6000,
-            position: 'top-right',
-            timerProgressBar: true,
-            showConfirmButton: false,
-        })
+        if (logoutUser) {
+            swal.fire({
+                title: "You have been logged out...",
+                icon: "success",
+                toast: true,
+                timer: 6000,
+                position: 'top-right',
+                timerProgressBar: true,
+                showConfirmButton: false,
+            })
+        }
     }
 
     const updateToken = async () => {

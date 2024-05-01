@@ -14,22 +14,23 @@ const LoginPage = () => {
 
         console.log(email);
         console.log(password);
+        console.log(email?.value);
     }
 
     return (
         <>
             <section className="h-screen bg-[#9A616D]">
                 <div className="container mx-auto h-full py-20 flex items-center justify-center">
-                    <div className="w-full md:w-3/4 xl:w-1/2">
-                        <div className="bg-white rounded-xl flex flex-col md:flex-row">
-                            <div className="hidden md:flex md:w-1/2 lg:w-3/5">
+                    <div className="w-full xl:w-3/5">
+                        <div className="bg-white rounded-xl md:flex lg:flex xl:flex">
+                            <div className="hidden md:flex md:w-1/2 xl:w-3/7">
                                 <img
                                     src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
                                     alt="login form"
                                     className="w-full h-full object-cover rounded-l-xl"
                                 />
                             </div>
-                            <div className="w-full md:w-1/2 lg:w-2/5 flex items-center p-8 lg:p-20 text-black">
+                            <div className="flex items-center p-8 text-black">
                                 <form onSubmit={handleSubmit} className="w-full ">
                                     <div className="flex items-center mb-3 pb-1">
                                         <i
@@ -38,35 +39,41 @@ const LoginPage = () => {
                                         />
                                         <span className="text-2xl font-bold">Welcome back 👋</span>
                                     </div>
-                                    <h5
-                                        className="font-normal mb-3 pb-3"
-                                        style={{ letterSpacing: 1 }}
-                                    >
-                                        Sign into your account
-                                    </h5>
-                                    <div className="mb-4">
+                                    <div className="mb-6">
+                                        <h3 className="text-2xl font-bold">Log In to account</h3>
+                                    </div>
+                                    <div className="relative flex items-center">
                                         <input
                                             type="email"
-                                            id="form2Example17"
-                                            className="form-control form-control-lg"
+                                            required
+                                            className="bg-white border border-gray-300 w-full text-sm px-4 py-2.5 my-2 rounded-md outline-[#9A658C]"
                                             name='email'
                                             placeholder='Email Address'
                                         />
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" className="w-4 h-4 absolute right-4" viewBox="0 0 682.667 682.667">
+
+                                            <g clip-path="url(#a)" transform="matrix(1.33 0 0 -1.33 0 682.667)">
+                                                <path fill="none" stroke-miterlimit="10" stroke-width="40" d="M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z" data-original="#000000"></path>
+                                                <path d="M472 274.9V107.999c0-11.027-8.972-20-20-20H60c-11.028 0-20 8.973-20 20V274.9L0 304.652V107.999c0-33.084 26.916-60 60-60h392c33.084 0 60 26.916 60 60v196.653Z" data-original="#000000"></path>
+                                            </g>
+                                        </svg>
 
                                     </div>
-                                    <div className="mb-4">
+                                    <div className="relative flex items-center">
                                         <input
                                             type="password"
-                                            id="form2Example27"
-                                            className="form-control form-control-lg"
+                                            required
+                                            className="bg-white border border-gray-300 w-full text-sm px-4 py-2.5 my-2 rounded-md outline-[#9A658C]"
                                             name='password'
-                                            placeholder='Password'
+                                            placeholder='Password  (eg. Abcd@123)'
                                         />
-
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" className="w-4 h-4 absolute right-4 cursor-pointer" viewBox="0 0 128 128">
+                                            <path d="M64 104C22.127 104 1.367 67.496.504 65.943a4 4 0 0 1 0-3.887C1.367 60.504 22.127 24 64 24s62.633 36.504 63.496 38.057a4 4 0 0 1 0 3.887C126.633 67.496 105.873 104 64 104zM8.707 63.994C13.465 71.205 32.146 96 64 96c31.955 0 50.553-24.775 55.293-31.994C114.535 56.795 95.854 32 64 32 32.045 32 13.447 56.775 8.707 63.994zM64 88c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm0-40c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16z" data-original="#000000"></path>
+                                        </svg>
                                     </div>
                                     <div className="pt-1 mb-4">
                                         <button
-                                            className="btn btn-dark btn-lg btn-block"
+                                            className="w-full py-3 px-4 text-sm font-semibold rounded text-white bg-[#c844a5] hover:bg-[#df6cc0] focus:outline-none"
                                             type="submit"
                                         >
                                             Login
